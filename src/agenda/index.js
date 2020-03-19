@@ -241,12 +241,8 @@ export default class AgendaView extends Component {
   componentDidUpdate(prevProps: any, prevState: any) {
     if(this.props.openCalendar && this.props.openCalendar!=prevProps.openCalendar){
       this.setScrollPadPosition(0, true);
-      this.setState({
-        calendarScrollable: true
-      });
-      if (this.props.onCalendarToggled) {
-        this.props.onCalendarToggled(true);
-      }
+      this.onTouchEnd();
+        this.enableCalendarScrolling();
     }
     if(this.props.closeCalendar && this.props.closeCalendar!=prevProps.closeCalendar){
       this.chooseDay(this.state.selectedDay)
