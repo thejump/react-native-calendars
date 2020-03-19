@@ -10,6 +10,8 @@ import ReservationsList from './reservation-list';
 import styleConstructor from './style';
 import {VelocityTracker} from '../input';
 import {AGENDA_CALENDAR_KNOB} from '../testIDs';
+import { shouldLoadOnPropChange } from "../../../../App/js/helpers"
+import { Actions as notificationActions } from "../../../../App/Actions/centralNotifications"
 
 
 const HEADER_HEIGHT = 104;
@@ -226,7 +228,7 @@ export default class AgendaView extends Component {
     }
   }
 
-  UNSAFE_componentWillMount() {
+  componentDidMount() {
     this._isMounted = true;
     this.loadReservations(this.props);
   }
@@ -234,6 +236,23 @@ export default class AgendaView extends Component {
   componentWillUnmount() {
     this._isMounted = false;
   }
+
+
+  componentDidUpdate(prevProps: any, prevState: any) {
+    if(this.props.openCalendar && this.props.openCalendar!=prevProps.openCalendar){
+      this.setScrollPadPosition(0, true);
+      this.setState({
+        calendarScrollable: true
+      });
+      if (this.props.onCalendarToggled) {
+        this.props.onCalendarToggled(true);
+      }
+    }
+    if(this.props.closeCalendar && this.props.closeCalendar!=prevProps.closeCalendar){
+      this.chooseDay(this.state.selectedDay)
+    }
+  }
+
 
   UNSAFE_componentWillReceiveProps(props) {
     if (props.items) {
