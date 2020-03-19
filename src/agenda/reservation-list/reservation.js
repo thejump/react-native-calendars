@@ -6,11 +6,12 @@ import {xdateToData} from '../../interface';
 import XDate from 'xdate';
 import dateutils from '../../dateutils';
 import styleConstructor from './style';
+import Colors from "../../../../../App/Themes"
 
 
 class Reservation extends Component {
   static displayName = 'IGNORE';
-  
+
   constructor(props) {
     super(props);
 
@@ -70,10 +71,17 @@ class Reservation extends Component {
       content = this.props.renderEmptyDate(date);
     }
     return (
+      <View>
       <View style={this.styles.container}>
         {this.renderDate(date, reservation)}
         <View style={{flex: 1}}>
           {content}
+        </View>
+
+      </View>
+        <View style={{height:1,width:'100%',marginLeft:16}}>
+          <View style={{ height: 1,
+            backgroundColor: 'rgb(235,235,235)',width:'100%'}}></View>
         </View>
       </View>
     );
