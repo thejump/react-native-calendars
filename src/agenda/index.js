@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, Dimensions, Animated, ViewPropTypes} from 'react-native';
+import {Text, View, Dimensions, Animated} from 'react-native';
 import PropTypes from 'prop-types';
 import XDate from 'xdate';
 
@@ -16,8 +16,6 @@ import { Actions as notificationActions } from "../../../../App/Actions/centralN
 
 const HEADER_HEIGHT = 104;
 const KNOB_HEIGHT = 24;
-// Fallback when RN version is < 0.44
-const viewPropTypes = ViewPropTypes || View.propTypes;
 
 /**
  * @description: Agenda component
@@ -28,73 +26,6 @@ const viewPropTypes = ViewPropTypes || View.propTypes;
  */
 export default class AgendaView extends Component {
   static displayName = 'Agenda';
-
-  static propTypes = {
-    /** Specify theme properties to override specific styles for calendar parts. Default = {} */
-    theme: PropTypes.object,
-    /** agenda container style */
-    style: viewPropTypes.style,
-    /** the list of items that have to be displayed in agenda. If you want to render item as empty date
-    the value of date key has to be an empty array []. If there exists no value for date key it is
-    considered that the date in question is not yet loaded */
-    items: PropTypes.object,
-    /** callback that gets called when items for a certain month should be loaded (month became visible) */
-    loadItemsForMonth: PropTypes.func,
-    /** callback that fires when the calendar is opened or closed */
-    onCalendarToggled: PropTypes.func,
-    /** callback that gets called on day press */
-    onDayPress: PropTypes.func,
-    /** callback that gets called when day changes while scrolling agenda list */
-    onDaychange: PropTypes.func,
-    /** specify how each item should be rendered in agenda */
-    renderItem: PropTypes.func,
-    /** specify how each date should be rendered. day can be undefined if the item is not first in that day. */
-    renderDay: PropTypes.func,
-    /** specify how agenda knob should look like */
-    renderKnob: PropTypes.func,
-    /** specify how empty date content with no items should be rendered */
-    renderEmptyDay: PropTypes.func,
-    /** specify what should be rendered instead of ActivityIndicator */
-    renderEmptyData: PropTypes.func,
-    /** specify your item comparison function for increased performance */
-    rowHasChanged: PropTypes.func,
-    /** Max amount of months allowed to scroll to the past. Default = 50 */
-    pastScrollRange: PropTypes.number,
-    /** Max amount of months allowed to scroll to the future. Default = 50 */
-    futureScrollRange: PropTypes.number,
-    /** initially selected day */
-    selected: PropTypes.any,
-    /** Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined */
-    minDate: PropTypes.any,
-    /** Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined */
-    maxDate: PropTypes.any,
-    /** If firstDay=1 week starts from Monday. Note that dayNames and dayNamesShort should still start from Sunday. */
-    firstDay: PropTypes.number,
-    /** Collection of dates that have to be marked. Default = items */
-    markedDates: PropTypes.object,
-    /** Optional marking type if custom markedDates are provided */
-    markingType: PropTypes.string,/*
-    /** Hide knob button. Default = false */
-    hideKnob: PropTypes.bool,
-    /** Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting */
-    monthFormat: PropTypes.string,
-    /** A RefreshControl component, used to provide pull-to-refresh functionality for the ScrollView. */
-    refreshControl: PropTypes.element,
-    /** If provided, a standard RefreshControl will be added for "Pull to Refresh" functionality. Make sure to also set the refreshing prop correctly. */
-    onRefresh: PropTypes.func,
-    /** Set this true while waiting for new data from a refresh. */
-    refreshing: PropTypes.bool,
-    /** Display loading indicator. Default = false */
-    displayLoadingIndicator: PropTypes.bool,
-    /** Called when the user begins dragging the agenda list. **/
-    onScrollBeginDrag: PropTypes.func,
-    /** Called when the user stops dragging the agenda list. **/
-    onScrollEndDrag: PropTypes.func,
-    /** Called when the momentum scroll starts for the agenda list. **/
-    onMomentumScrollBegin: PropTypes.func,
-    /** Called when the momentum scroll stops for the agenda list. **/
-    onMomentumScrollEnd: PropTypes.func
-  };
 
   constructor(props) {
     super(props);
