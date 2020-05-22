@@ -166,7 +166,6 @@ class CalendarList extends Component {
       }
       newrows.push(val);
     }
-    global.warn('afterrows3',{newrows,props,t:this.props})
     this.setState({
       rows: newrows
     });
@@ -203,7 +202,6 @@ class CalendarList extends Component {
     if (this.props.onVisibleMonthsChange) {
       this.props.onVisibleMonthsChange(visibleMonths);
     }
-    global.warn('afterrows',newrows)
     this.setState({
       rows: newrows,
       currentMonth: parseDate(visibleMonths[0])
@@ -295,7 +293,6 @@ class CalendarList extends Component {
   }
 
   render() {
-    global.warn('afterrows2',this.state.rows)
     return (
       <View>
         <FlatList
