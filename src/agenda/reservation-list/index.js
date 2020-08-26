@@ -10,7 +10,7 @@ import styleConstructor from './style';
 
 class ReservationList extends Component {
   static displayName = 'IGNORE';
-  
+
   static propTypes = {
     // specify your item comparison function for increased performance
     rowHasChanged: PropTypes.func,
@@ -41,13 +41,13 @@ class ReservationList extends Component {
 
   constructor(props) {
     super(props);
-    
+
     this.styles = styleConstructor(props.theme);
-    
+
     this.state = {
       reservations: []
     };
-    
+
     this.heights=[];
     this.selectedDay = this.props.selectedDay;
     this.scrollOver = true;
@@ -57,9 +57,19 @@ class ReservationList extends Component {
     this.updateDataSource(this.getReservations(this.props).reservations);
   }
 
+
+  componentDidUpdate(prevProps: any, prevState: any) {
+    if(this.props.reservations!=prevProps.reservations){
+      this.updateDataSource(this.getReservations(this.props).reservations);
+    }
+  }
+
+
+
   updateDataSource(reservations) {
     this.setState({
-      reservations
+      reservations,
+      refreshCounter:(this.state.refreshCounter || 0)+1
     });
   }
 
@@ -115,9 +125,11 @@ class ReservationList extends Component {
   }
 
   renderRow({item, index}) {
+    global.warn('jj2eva99',item)
     return (
       <View onLayout={this.onRowLayoutChange.bind(this, index)}>
         <Reservation
+          key={index + (this.state.refreshCounter || 0)}
           item={item}
           renderItem={this.props.renderItem}
           renderDay={this.props.renderDay}
@@ -213,6 +225,7 @@ class ReservationList extends Component {
         onScrollEndDrag={this.props.onScrollEndDrag}
         onMomentumScrollBegin={this.props.onMomentumScrollBegin}
         onMomentumScrollEnd={this.props.onMomentumScrollEnd}
+        extraData={this.state.refreshCounter}
       />
     );
   }
