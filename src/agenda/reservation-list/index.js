@@ -125,8 +125,7 @@ class ReservationList extends Component {
   }
 
   renderRow({item, index}) {
-    global.warn('jj2eva99',item)
-    return (
+     return (
       <View onLayout={this.onRowLayoutChange.bind(this, index)}>
         <Reservation
           key={index + (this.state.refreshCounter || 0)}
