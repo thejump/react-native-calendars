@@ -67,7 +67,7 @@ export default class AgendaView extends Component {
   }
 
   setScrollPadPosition(y, animated) {
-    this.scrollPad.getNode().scrollTo({x: 0, y, animated});
+    this.scrollPad.scrollTo({x: 0, y, animated});
   }
 
   onScrollPadLayout(evt) {
@@ -406,7 +406,7 @@ export default class AgendaView extends Component {
           ))}
         </Animated.View>
         <Animated.ScrollView
-          ref={c => this.scrollPad = c}
+          ref={c => (this.scrollPad = c)}
           overScrollMode='never'
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
